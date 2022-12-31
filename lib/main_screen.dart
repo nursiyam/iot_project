@@ -9,7 +9,8 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  bool ledOn = true;
+  bool ledOn = false;
+  //I'm adding a comment
   int counter = 0;
   int sensorReading = 10;
   /*final dataBase = FirebaseDatabase.instance.ref();
