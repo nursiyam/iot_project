@@ -10,21 +10,20 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   bool ledOn = true;
-  int counter = 0;
-  int sensorReading = 10;
+  int tempReading = 10;
   /*final dataBase = FirebaseDatabase.instance.ref();
 
   _MainScreenState() {
     dataBase.child('ESP').once().then((snap) {
-      sensorReading = snap.value['LDR'];
+      tempReading = snap.value['Temp'];
       ledOn = snap.value['LED'] == 1;
     }).then((value) {
       setState(() {});
     });
     dataBase.child('ESP').onChildChanged.listen((event) {
       DataSnapshot snap = event.snapshot;
-      if (snap.key == 'LDR') {
-        sensorReading = snap.value;
+      if (snap.key == 'Temp') {
+        tempReading = snap.value;
         setState(() {});
       }
     });
@@ -55,7 +54,7 @@ class _MainScreenState extends State<MainScreen> {
               width: 10,
             ),
             Text(
-                '$sensorReading'), //The dollar sign is to convert the integer into string
+                '$tempReading'), //The dollar sign is to convert the integer into string
           ],
         )
       ]),
