@@ -10,24 +10,30 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   bool ledOn = true;
-  int tempReading = 10;
-  /*final dataBase = FirebaseDatabase.instance.ref();
+  int sensorReading = 10;
+  dynamic data;
+  final dataBase = FirebaseDatabase.instance.ref();
 
-  _MainScreenState() {
+  @override
+  void initState() {
     dataBase.child('ESP').once().then((snap) {
-      tempReading = snap.value['Temp'];
-      ledOn = snap.value['LED'] == 1;
+      data = snap.snapshot.value;
+      sensorReading = data['LDR'];
+      ledOn = data['LED'] == 1;
     }).then((value) {
       setState(() {});
     });
     dataBase.child('ESP').onChildChanged.listen((event) {
       DataSnapshot snap = event.snapshot;
-      if (snap.key == 'Temp') {
-        tempReading = snap.value;
-        setState(() {});
+
+      if (snap.key == 'LDR') {
+        setState(() {
+          sensorReading = int.parse(snap.value.toString());
+        });
       }
     });
-  }*/
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +46,9 @@ class _MainScreenState extends State<MainScreen> {
         ElevatedButton(
             onPressed: () {
               ledOn = !ledOn;
+              final child = dataBase.child('ESP/');
+              int boolString = ledOn ? 1 : 0;
+              child.update({'LED': boolString});
               setState(() {});
               //print('clicked');
             },
@@ -54,7 +63,7 @@ class _MainScreenState extends State<MainScreen> {
               width: 10,
             ),
             Text(
-                '$tempReading'), //The dollar sign is to convert the integer into string
+                '$sensorReading'), //The dollar sign is to convert the integer into string
           ],
         )
       ]),
