@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:iot_project/Screens/dashboard_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -41,9 +42,7 @@ class _MainScreenState extends State<MainScreen> {
 
   //List of tabs (screens)
   static const List<Widget> _screenOptions = <Widget>[
-    Text(
-      'Index 0: Dashboard',
-    ),
+    DashboardScreen(),
     Text(
       'Index 1: Schedule a Task',
     ),
