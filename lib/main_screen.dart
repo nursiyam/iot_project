@@ -1,6 +1,8 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:iot_project/Screens/dashboard_screen.dart';
+import 'package:iot_project/Screens/schedule_screen.dart';
+import 'package:iot_project/Screens/statisctics_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -43,12 +45,8 @@ class _MainScreenState extends State<MainScreen> {
   //List of tabs (screens)
   static const List<Widget> _screenOptions = <Widget>[
     DashboardScreen(),
-    Text(
-      'Index 1: Schedule a Task',
-    ),
-    Text(
-      'Index 2: Statistics',
-    ),
+    ScheduleScreen(),
+    StatisticsScreen()
   ];
 
   //  Change the selected item's index
