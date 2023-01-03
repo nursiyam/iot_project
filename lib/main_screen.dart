@@ -16,6 +16,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
+    //Read the data from the database once
     dataBase.child('ESP').once().then((snap) {
       data = snap.snapshot.value;
       sensorReading = data['LDR'];
@@ -23,6 +24,7 @@ class _MainScreenState extends State<MainScreen> {
     }).then((value) {
       setState(() {});
     });
+    //Listen to database for changes
     dataBase.child('ESP').onChildChanged.listen((event) {
       DataSnapshot snap = event.snapshot;
 
@@ -35,13 +37,50 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
   }
 
+  int _selectedIndex = 0;
+
+  //List of tabs (screens)
+  static const List<Widget> _screenOptions = <Widget>[
+    Text(
+      'Index 0: Dashboard',
+    ),
+    Text(
+      'Index 1: Schedule a Task',
+    ),
+    Text(
+      'Index 2: Statistics',
+    ),
+  ];
+
+  //  Change the selected item's index
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
           leading: const Icon(Icons.lightbulb),
           title: const Text('Home Automation')),
-      body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.blue,
+          onTap: _onItemTapped,
+          items: const [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.dashboard), label: 'Dashboard'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.calendar_month_outlined),
+                label: 'Schedule Tasks'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.stacked_line_chart_outlined),
+                label: 'Statistics')
+          ]),
+      body: _screenOptions.elementAt(_selectedIndex),
+      /*Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text(style: TextStyle(fontSize: 25), 'Control Your Devices'),
         ElevatedButton(
             onPressed: () {
@@ -66,7 +105,7 @@ class _MainScreenState extends State<MainScreen> {
                 '$sensorReading'), //The dollar sign is to convert the integer into string
           ],
         )
-      ]),
+      ]),*/
     );
   }
 }
