@@ -24,14 +24,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             SizedBox(height: 30),
             Row(
               children: [
-                GestureDetector(
-                  onTap: () {},
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: Image.asset('assets/images/living.webp',
-                        width: 110.0, height: 110.0),
-                  ),
-                ),
+                Image.asset('assets/images/living.webp'),
                 Text('hi'),
               ],
             )
