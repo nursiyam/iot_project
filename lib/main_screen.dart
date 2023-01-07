@@ -49,7 +49,6 @@ class _MainScreenState extends State<MainScreen> {
                 label: 'Statistics')
           ]),
       body: _screenOptions.elementAt(_selectedIndex),
-      /**/
     );
   }
 }

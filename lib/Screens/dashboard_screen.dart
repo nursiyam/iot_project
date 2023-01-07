@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:iot_project/Screens/living_room.dart';
+import 'schedule_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -20,20 +22,119 @@ class _DashboardScreenState extends State<DashboardScreen> {
             SizedBox(height: 15),
             Text(
                 style: TextStyle(fontSize: 16, color: Colors.grey),
-                'This app will help you control the appliences in your home for optimal usage and luxury'),
+                'This app will help you control the appliances in your home for optimal usage and luxury'),
             SizedBox(height: 30),
-            Row(
-              children: [
-                Image.asset('assets/images/living.webp'),
-                Text('hi'),
-              ],
-            )
+            Expanded(
+                child: GridView.count(
+                    crossAxisCount: 2,
+                    primary: false,
+                    padding: const EdgeInsets.all(20),
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    children: <Widget>[
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LivingRoom()),
+                      );
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: Image.network('https://i.imgur.com/gdlnkvN.jpeg',
+                          fit: BoxFit.cover),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LivingRoom()),
+                      );
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: Image.network(
+                          'https://images.pexels.com/photos/4850620/pexels-photo-4850620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                          fit: BoxFit.cover),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LivingRoom()),
+                      );
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: Image.network(
+                          'https://images.pexels.com/photos/3926542/pexels-photo-3926542.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                          fit: BoxFit.cover),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LivingRoom()),
+                      );
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: Image.network(
+                          'https://images.pexels.com/photos/9720924/pexels-photo-9720924.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                          fit: BoxFit.cover),
+                    ),
+                  ),
+                ])),
           ],
         ));
   }
 }
 
-
+/*
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LivingRoom()),
+                    );
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: Image.network('https://i.imgur.com/gdlnkvN.jpeg',
+                        width: 150.0, height: 112.5),
+                  ),
+                ),
+                //Image.network('https://i.imgur.com/gdlnkvN.jpeg'),
+                //Image.asset('asstes/images/living.jpg'),
+                SizedBox(width: 30),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LivingRoom()),
+                    );
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: Image.network('https://i.imgur.com/gdlnkvN.jpeg',
+                        width: 150.0, height: 112.5),
+                  ),
+                ),
+              ],
+            ),
+            */
 
 
 
