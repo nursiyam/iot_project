@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:iot_project/Screens/kitchen.dart';
+import 'package:iot_project/Screens/laundry.dart';
 import 'package:iot_project/Screens/living_room.dart';
-import 'schedule_screen.dart';
+import 'bedroom.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -51,7 +53,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const LivingRoom()),
+                            builder: (context) => const Bedroom()),
                       );
                     },
                     child: ClipRRect(
@@ -66,7 +68,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const LivingRoom()),
+                            builder: (context) => const Kitchen()),
                       );
                     },
                     child: ClipRRect(
@@ -81,7 +83,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const LivingRoom()),
+                            builder: (context) => const Laundry()),
                       );
                     },
                     child: ClipRRect(
