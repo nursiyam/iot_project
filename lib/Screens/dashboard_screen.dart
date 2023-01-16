@@ -99,46 +99,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 }
 
-/*
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LivingRoom()),
-                    );
-                  },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: Image.network('https://i.imgur.com/gdlnkvN.jpeg',
-                        width: 150.0, height: 112.5),
-                  ),
-                ),
-                //Image.network('https://i.imgur.com/gdlnkvN.jpeg'),
-                //Image.asset('asstes/images/living.jpg'),
-                SizedBox(width: 30),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LivingRoom()),
-                    );
-                  },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: Image.network('https://i.imgur.com/gdlnkvN.jpeg',
-                        width: 150.0, height: 112.5),
-                  ),
-                ),
-              ],
-            ),
-            */
-
-
 
 /*
 class _DashboardScreenState extends State<DashboardScreen> {

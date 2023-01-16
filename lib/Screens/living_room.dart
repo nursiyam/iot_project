@@ -25,7 +25,7 @@ class _LivingRoomState extends State<LivingRoom> {
     dataBase.child('ESP').once().then((snap) {
       data = snap.snapshot.value;
       lightReading = data['LDR'];
-      tempReading = data['temp'];
+      tempReading = data['Temp'];
       ledOn = data['LED'] == 1;
     }).then((value) {
       setState(() {});
@@ -41,7 +41,7 @@ class _LivingRoomState extends State<LivingRoom> {
         });
       }
 
-      if (snap.key == 'temp') {
+      if (snap.key == 'Temp') {
         setState(() {
           tempReading = int.parse(snap.value.toString());
         });

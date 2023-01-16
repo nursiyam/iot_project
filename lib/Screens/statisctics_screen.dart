@@ -14,53 +14,10 @@ class StatisticsScreen extends StatefulWidget {
 }
 
 class _StatisticsScreenState extends State<StatisticsScreen> {
-// Database code
-  bool ledOn = true;
-  bool acOn = false;
-  bool tvOn = false;
-  bool curtainClosed = true;
-  int tempReading = 10;
-  int lightReading = 30;
-  int minutes = 1;
-
-//Read from the database
-  dynamic data;
-  final dataBase = FirebaseDatabase.instance.ref();
   @override
   void initState() {
-    //Read the data from the database once
-    dataBase.child('ESP').once().then((snap) {
-      data = snap.snapshot.value;
-      lightReading = data['LDR'];
-      tempReading = data['temp'];
-      ledOn = data['LED'] == 1;
-    }).then((value) {
-      setState(() {
-        getJson();
-      });
-    });
-
-    //Listen to database for changes
-    dataBase.child('ESP').onChildChanged.listen((event) {
-      DataSnapshot snap = event.snapshot;
-
-      if (snap.key == 'LDR') {
-        setState(() {
-          lightReading = int.parse(snap.value.toString());
-        });
-      }
-
-      if (snap.key == 'temp') {
-        setState(() {
-          tempReading = int.parse(snap.value.toString());
-        });
-      }
-      if (snap.key == 'minutes') {
-        setState(() {
-          minutes = int.parse(snap.value.toString());
-          getJson();
-        });
-      }
+    setState(() {
+      getJson();
     });
     super.initState();
   }
@@ -74,13 +31,13 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
 
   Future getJson() async {
     var url = Uri.parse(
-        'https://script.google.com/macros/s/AKfycby3YCkkLzBKpOimOt6xs-JKF9BCJC6ZoHHORVxGrYOWd164cOx_HS4vvDTeovWgHEjYig/exec');
+        'https://script.google.com/macros/s/AKfycbyC8urS3uqp5gBsTutnaN5Zppqdy9_iIZawy9nTffMQVhf8xnq5VumL2BjC5J2puHwQTw/exec');
     json = await http.read(url).then((value) {
       ldrValues = jsonDecode(value);
       itemCount = ldrValues.length < 60 ? ldrValues.length : 60;
       var dataUsed = ldrValues.sublist(0, itemCount);
-      ldrData = [];
-      time = [];
+      ldrData = [4.0];
+      time = ['1'];
       dataUsed.forEach((element) {
         ldrData.add((element['value'].toDouble()) / 100);
         time.add(element['date'].split('T')[1].substring(0, 5));
@@ -109,34 +66,18 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
               reverse: true,
               child: LineGraph(
                 features: [
-                  Feature(title: "Sensor", color: Colors.blue, data: [
-                    0.1,
-                    0.2,
-                    0.6,
-                    0.4,
-                    0.3,
-                    0.6,
-                    0.7,
-                    0.2,
-                    0.9,
-                    1.0
-                  ] //List.from(ldrData.reversed),
-                      ),
+                  Feature(
+                    title: "Sensor", color: Colors.blue,
+                    data: List.from(ldrData.reversed),
+                    //[0.1,0.2,0.6,0.4,0.3,0.6,0.7,0.2,0.9,1.0]
+                    //List.from(ldrData.reversed),
+                  ),
                 ],
-                size: Size(
-                    380, 400), //Size((ldrData.length * 70).toDouble(), 400),
-                labelX: const [
-                  '1',
-                  '2',
-                  '3',
-                  '4',
-                  '5',
-                  '6',
-                  '7',
-                  '8',
-                  '9',
-                  '10'
-                ], //List.from(time.reversed),
+                size: Size((ldrData.length * 70).toDouble(), 400),
+                //Size(380, 400), //Size((ldrData.length * 70).toDouble(), 400),
+                labelX: List.from(time.reversed),
+                //List.from(time.reversed),
+                //['1','2','3','4','5','6','7','8','9','10'],
                 labelY: ['20%', '40%', '60%', '80%', '100%'],
                 graphColor: Colors.blue,
                 graphOpacity: 0.2,
@@ -146,3 +87,59 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
         ));
   }
 }
+
+
+
+/*
+// Database code
+  bool ledOn = true;
+  bool acOn = false;
+  bool tvOn = false;
+  bool curtainClosed = true;
+  int tempReading = 10;
+  int lightReading = 30;
+  int minutes = 1;
+
+//Read from the database
+  dynamic data;
+  final dataBase = FirebaseDatabase.instance.ref();
+  @override
+  void initState() {
+    //Read the data from the database once
+    dataBase.child('ESP').once().then((snap) {
+      data = snap.snapshot.value;
+      lightReading = data['LDR'];
+      tempReading = data['Temp'];
+      minutes = data['minutes'];
+      ledOn = data['LED'] == 1;
+    }).then((value) {
+      setState(() {
+        getJson();
+      });
+    });
+
+    //Listen to database for changes
+    dataBase.child('ESP').onChildChanged.listen((event) {
+      DataSnapshot snap = event.snapshot;
+
+      if (snap.key == 'LDR') {
+        setState(() {
+          lightReading = int.parse(snap.value.toString());
+        });
+      }
+
+      if (snap.key == 'Temp') {
+        setState(() {
+          tempReading = int.parse(snap.value.toString());
+        });
+      }
+      if (snap.key == 'minutes') {
+        setState(() {
+          minutes = int.parse(snap.value.toString());
+          getJson();
+        });
+      }
+    });
+    super.initState();
+  }
+  */
